@@ -95,18 +95,23 @@ public class ParkingFineFormController implements Initializable, DataChangeListe
 	public void onBtSendEmail(ActionEvent event) {
 		JavaMail javamail = new JavaMail();
 		Alert alert = Alerts.showAlertVariavel("Loading", "Enviando...", null, AlertType.INFORMATION);
-		 Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-	     okButton.setDisable(true);
+        Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+  	    okButton.setDisable(true);
 		
-		try {
-			CompletableFuture.runAsync(() -> {
-	            javamail.sendMail(getList());
-	            // Fecha o alerta na thread da interface gráfica
-	            Platform.runLater(alert::close);
+			CompletableFuture.runAsync(() -> {	
+				try {
+					javamail.sendMail(getList(), alert);
+					// Fecha o alerta na thread da interface gráfica
+					Platform.runLater(alert::close);
+				}catch(Exception e) {
+					 Platform.runLater(() -> {
+			    		  alert.setTitle("Error");
+			    		  alert.setHeaderText("Error to sendMail");
+			              alert.setContentText(e.getMessage());
+			              alert.setAlertType(AlertType.ERROR);
+			          });
+				}
 	        });
-		}catch(Exception e) {
-			alert.setHeaderText(e.getMessage());
-		}
 		tableViewCar.setItems(null);
 	}
 	

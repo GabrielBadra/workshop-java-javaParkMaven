@@ -6,7 +6,6 @@ import java.util.Properties;
 
 import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -14,9 +13,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.GabrielBadra.Project.model.entities.Car;
+
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 public class JavaMail {
 
-	public void sendMail(List<Car> cars) {
+	public void sendMail(List<Car> cars, Alert alert) throws Exception {
 		String remetente = "gabrielfreitasalves9@gmail.com";
 		String senha = "tkrfavzhciiksaih";
 		String destination = "gabrielfreitasalves755@gmail.com";
@@ -58,8 +61,8 @@ public class JavaMail {
 	    	  message.setSubject("Estacionamento");
 	    	  message.setText(carsText);
 	    	  Transport.send(message);
-	      }catch(MessagingException e) {
-	    	  e.printStackTrace();
+	      }catch(Exception e) {
+	    	 throw new Exception(e.getMessage());
 	      }
 	}
 
