@@ -1,5 +1,6 @@
 package com.GabrielBadra.Project.gui.util;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Properties;
 
@@ -63,7 +64,8 @@ public class JavaMail {
 	}
 
 	private String FormatListToMessage(List<Car> cars) {
-		String message = "Bom dia, segue a lista de veiculos identificados sem TAG:";
+		String greeting = greetings();
+		String message = greeting + ", segue a lista de veiculos identificados sem TAG:";
 		
 		if(cars.size() > 0) {
 			for(Car car : cars) {
@@ -78,6 +80,20 @@ public class JavaMail {
 		message += "\n\n\n" + "Sistema de Gabriel";
 		
 		return message;
+	}
+
+	private String greetings() {
+		LocalTime currentTime = LocalTime.now();
+        int hour = currentTime.getHour();
+        System.out.println(hour);
+        
+        if(hour > 5 && hour < 13) {
+        	return "Bom dia";
+        }else if(hour > 12 && hour < 18) {
+        	return "Boa tarde";
+        }else {
+        	return "Boa noite";
+        }
 	}
 }
 
