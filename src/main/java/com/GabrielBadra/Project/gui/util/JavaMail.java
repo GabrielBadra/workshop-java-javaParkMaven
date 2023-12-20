@@ -14,9 +14,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.GabrielBadra.Project.model.entities.Car;
 
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 public class JavaMail {
 
 	public void sendMail(List<Car> cars, Alert alert) throws Exception {

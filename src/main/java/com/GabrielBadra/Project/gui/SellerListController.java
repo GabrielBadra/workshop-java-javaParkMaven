@@ -82,7 +82,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Seller obj = new Seller();
-		createDialogForm(obj, "/gui/SellerForm.fxml", Utils.currentStage(event));
+		createDialogForm(obj, "/com/GabrielBadra/Project/gui/SellerForm.fxml", Utils.currentStage(event));
 	}
 	
 	@FXML
@@ -220,7 +220,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 				}
 				setGraphic(button);
 				button.setOnAction(
-						event -> createDialogForm(obj, "/gui/SellerForm.fxml", Utils.currentStage(event)));
+						event -> createDialogForm(obj, "/com/GabrielBadra/Project/gui/SellerForm.fxml", Utils.currentStage(event)));
 						
 			}
 		});

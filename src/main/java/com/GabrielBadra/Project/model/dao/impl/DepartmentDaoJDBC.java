@@ -103,7 +103,9 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 			}
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
 			throw new DbException(e.getMessage());
+			
 		} 
 		finally {
 			DB.closeStatement(st);

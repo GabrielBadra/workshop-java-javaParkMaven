@@ -1,0 +1,5 @@
+user=root
+password=gh-HeDFcAGC33hfG6HaF62af63hFhGf2
+dburl=jdbc:mysql://root:gh-HeDFcAGC33hfG6HaF62af63hFhGf2@roundhouse.proxy.rlwy.net:18972/railway
+useSSL=false
+allowPublicKeyRetrieval=true
