@@ -10,11 +10,13 @@ import com.GabrielBadra.Project.model.service.DepartmentService;
 import com.GabrielBadra.Project.model.service.SellerService;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -33,13 +35,13 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemSellerAction() {
-		loadView("/com/GabrielBadra/Project/gui/SellerList.fxml", (SellerListController controller) -> {
+		loadView("/com/GabrielBadra/Project/gui/SellerList.fxml",(SellerListController controller) -> {
 			controller.setSellerService(new SellerService());
 			controller.uptadeTableView();
-			});
-		}
-	
-	
+		});
+		
+		
+	}
 	@FXML
 	public void onMenuItemDepartmentAction() {
 		loadView("/com/GabrielBadra/Project/gui/DepartmentList.fxml", (DepartmentListController controller) -> {
@@ -56,6 +58,7 @@ public class MainViewController implements Initializable{
 	@FXML
 	public void onMenuItemAboutAction() {
 		loadView("/com/GabrielBadra/Project/gui/About.fxml", x -> {});
+		
 	}
 	
 	@Override
@@ -65,6 +68,8 @@ public class MainViewController implements Initializable{
 	
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		try {
+			Alert alert = Alerts.showAlertVariavel("Loading ...", "Carregando ...", null, AlertType.INFORMATION);
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVbox = loader.load();
 			
@@ -79,6 +84,8 @@ public class MainViewController implements Initializable{
 			
 			T controller = loader.getController();
 			initializingAction.accept(controller);
+			
+			Platform.runLater(alert::close);
 		}catch(IOException e) {
 			Alerts.showAlert("Error", "Error Loading view", e.getMessage(), AlertType.ERROR);
 		}
