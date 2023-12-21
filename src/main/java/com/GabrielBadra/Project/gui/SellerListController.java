@@ -141,34 +141,34 @@ public class SellerListController implements Initializable, DataChangeListener {
 		initRemoveButtons();
 	}
 
-	private ObservableList<Seller> searchBar(ObservableList<Seller> obsList, String name) {
+	private ObservableList<Seller> searchBar(ObservableList<Seller> obsList, String plate) {
 		List<Seller> list = service.findAll();
 		List<String> campObj = new ArrayList<>();
-		List<String> campName = new ArrayList<>();
+		List<String> campPlaca = new ArrayList<>();
 		
 		for(Seller obj: list) {
 			//AQUI PEGA NOME SOBRENOME DO OBJ E COLOCAR EM ARRAY
-				campObj.addAll(Arrays.asList(obj.getName().split(" ")));
-				campName.addAll(Arrays.asList(name.split(" ")));
+				campObj.addAll(Arrays.asList(obj.getPlaca()));
+				campPlaca.addAll(Arrays.asList(plate.split(" ")));
 			//FIM
 			
 				//COMPARAÇÃO DE NOMES ESCRITA NA BARRA E DO BANCO DE DADOS
-					if(campObj.size() >= campName.size()) {
-							for(int i = 0; i < campName.size(); i++) {
-								if(campName.get(i).toUpperCase().equals(campObj.get(i).toUpperCase())) {
+					if(campObj.size() >= campPlaca.size()) {
+							for(int i = 0; i < campPlaca.size(); i++) {
+								if(campPlaca.get(i).toUpperCase().equals(campObj.get(i).toUpperCase())) {
 									obsList.add(obj);
 									break;
 								}
 							}
 					}else {
-						if(obj.getName().toUpperCase().equals(name.toUpperCase())) {
+						if(obj.getPlaca().toUpperCase().equals(plate.toUpperCase())) {
 							obsList.add(obj);
 						}
 					}
 				//FIM
 					
 					campObj.clear();
-					campName.clear();
+					campPlaca.clear();
 			}
 		
 		return obsList;
